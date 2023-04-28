@@ -133,7 +133,20 @@ int abs(int n)
     \part Calculez $\WP(\code{abs},\psi)$ pour $\psi$ la post-condition fournie, et déduisez-en un triplet de \bsc{Hoare} valide.
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        \WP(\code{abs},\psi) = \WP(5,\WP(6-7,\WP(8,\psi)))\\
+        \WP(\code{abs},\psi) = \WP(5,\WP(6-7,\psi[\result \leftarrow res]))\\
+        \WP(\code{abs},\psi) = n<0 \Rightarrow \psi[\result \leftarrow res][res \leftarrow -n]\\
+        \land n \geq 0 \Rightarrow \psi[\result \leftarrow res][res \leftarrow n]\\
+        \WP(\code{abs},\psi) = n<0 \Rightarrow (res == abs(n))[res \leftarrow -n] \\
+        \land n \geq 0 \Rightarrow (res == abs(n))[res \leftarrow n]\\
+        \WP(\code{abs},\psi) = (n<0 \Rightarrow -n == abs(n)) \land (n \geq 0 \Rightarrow n == abs(n))\\
+        \WP(\code{abs},\psi) = \top \land n<0 \lor n \geq 0 \\
+        \WP(\code{abs},\psi) = n<0 \lor n \geq 0
+        $
+        \\ \\
+        $ \{n<0 \lor n \geq 0\}abs\{\result == abs(n)\} $ est un triplet de \bsc{Hoare} valide.
+        
     \end{solutionorbox}
 
     \part Évidemment, on a ici une correction partielle, dans le sens où on n’a pas tenu compte des comportements indéterminés.
