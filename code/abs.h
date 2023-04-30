@@ -5,13 +5,16 @@
 
 /*@ logic integer abs(integer n) = 0<n?n:-n;*/
 
-/*@ terminates \true;
+/*@ requires INT_MAX > n > INT_MIN;
+    terminates \true;
     ensures \result == abs(n);
  */
 int abs(int n);
 
-/*@ terminates \true;
-    ensures \result == abs(n);*/
+/*@ requires INT_MAX > n > INT_MIN;
+    terminates \true;
+    ensures \result == abs(n);
+*/
 int abs2(int n);
 
 #endif
