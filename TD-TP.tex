@@ -141,7 +141,6 @@ int abs(int n)
         \WP(\code{abs},\psi) = n<0 \Rightarrow (res == abs(n))[res \leftarrow -n] \\
         \land n \geq 0 \Rightarrow (res == abs(n))[res \leftarrow n]\\
         \WP(\code{abs},\psi) = (n<0 \Rightarrow -n == abs(n)) \land (n \geq 0 \Rightarrow n == abs(n))\\
-        \WP(\code{abs},\psi) = \top \land n<0 \lor n \geq 0 \\
         \WP(\code{abs},\psi) = n<0 \lor n \geq 0
         $
         \\ \\
@@ -174,13 +173,32 @@ int abs2(int n)
     Justifiez que la formule obtenue est toujours vraie (on ne demande pas une preuve formelle mais une explication de la raison).
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        \WP(\code{abs2},\psi) = \WP(5,WP(6,\psi))\\
+        \WP(\code{abs2},\psi) = \WP(5,\psi[\result \leftarrow n*aux])\\
+        \WP(\code{abs2},\psi) = \WP(5,\psi[\result \leftarrow n*(n\%2 + (n+1)\%2)])\\
+        \WP(\code{abs2},\psi) = \WP(5,\psi[\result \leftarrow n*(n\%2) + n*((n+1)\%2)])\\
+        \WP(\code{abs2},\psi) = \psi[\result \leftarrow * (n\%2) + n * ((n + 1)\%2)]
+        $ 
+        \\ \\
+        La formule est toujours vraie car on retourne -n si la valeur est négative et n si elle est positive ou nul, ce qu'on attend de \textbf{abs2}.
+        \\ \\
+        Si la valeur est positive :\\
+        n * 1 $+$ n * 0 $=$ n ou n*0 $+$ n*1 $=$ n\\
+        Si la valeur est negative :\\
+        n * -1 $+$ n * 0 $=$ -n ou n*0 $+$ n*-1 $=$ -n\\
+        \\ \\
+        Donc la formule est toujours vraie.
+
     \end{solutionorbox}
 
     \part Quelle préconditions faut-il pour ne pas avoir de comportement indéterminé ? Justifiez.
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        requires \quad n \geq INT\_MIN;\\
+        requires \quad n < INT\_MAX;
+        $
     \end{solutionorbox}
 
     \part Compléter le fichier \texttt{abs.h} de manière à ce que Frama-C puisse démontrer la post-condition fournie, en ajoutant les assertions RTE. Il est bien évidemment possible (et encouragé) de répondre aux questions précédentes grâce à celle-ci.
@@ -222,7 +240,7 @@ int abs2(int n)
     \part Quelle condition doit-être vraie à la sortie de la boucle (i.e, $\WLP(18,\psi))$, pour $\psi$ la post-condition ?
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        (max - min) $\geq$ abs($tab[a]$ - $tab[b]$)
     \end{solutionorbox}
 
     \part Calculez $\WLP(12-16,I)$ pour un invariant I quelconque.
@@ -251,13 +269,25 @@ int abs2(int n)
     Pour chacun des invariants, comme elles sont similaires, vous pouvez n’expliquer qu’une seule des quatre implications
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        I1 : $1 \leq i \leq n$;\\
+        I2 : $\forall a,b; 1 \leq a < b < i \Rightarrow max - min \geq abs(tab[a] - tab[b])$\\
+        I3 : $\forall integer\ k; 1 \leq k < i \Rightarrow min \leq tab[k] \leq max;$\\
+        I4 :  $\exists k; 1 \leq k < n \Rightarrow min = tab[k]$\\
+        I5 :  $\exists k; 1 \leq k < n \Rightarrow max= tab[k]$
+        \\ \\
+        I = I1 ∧ I2 ∧ I3 ∧ I4 ∧ I5
+        \\ \\
+        On peut justifier $\neg(i < n) ∧ I \Rightarrow \WLP(18,\phi)$ car cela revient à dire que quand on termine la boucle $(i=n) \iff \neg(i < n)$, 
+        et que tous les invariants sont alors prouvés, alors on peut faire le return de max-min.
     \end{solutionorbox}
 
     \part Déduisez-en un triplet de \bsc{Hoare} valide pour votre fonction.
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        Ainsi, on a bien $i<n ∧I1∧I2∧I3∧I4∧I5 \Rightarrow WLP(12-16,I1∧I2∧I3∧I4∧I5)$, et donc on a bien un invariant de boucle.
+        \\ \\
+        On déduit de tout cela que $\WLP(max\_dist,\phi)$ est bien défini,\\ 
+        et que $\{i<n\}max\_dist\{\phi\}$ est un triplet de Hoare valide.
     \end{solutionorbox}
 
     \part Démontrez la terminaison de la fonction en donnant un variant de boucle et en démontrant qu’il décroît à chaque tour de boucle et qu’il est toujours positif (vous pouvez utiliser le calcul de la question b).
@@ -269,13 +299,18 @@ int abs2(int n)
     \part Quelles sont les valeurs mémoires modifiées par cette fonction (et la boucle) ? Vous répondrez en donnant les clauses assigns et loop assigns correspondantes.
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        les valeurs mémoires modifiées par cette fonction (et la boucle), sont :\\
+        min,max et i à chaque tour de boucle.\\
+        \\
+        $@$assigns \textbackslash{nothing};\\ pour la fonction\\
+        $@$loop assigns min,max,i;\\ dans la boucle
     \end{solutionorbox}
 
     \part Que manque-t’il comme précondition pour que la fonction ne puisse pas faire d’erreur à l’exécution ?
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        Il manque :\\
+        $@requires \ n \geq 1 \ \&\& \ \textbackslash{valid}(tab+(0..n-1));$
     \end{solutionorbox}
 
     \part Démontrez que la fonction suivante vérifie le même contrat de fonction :
