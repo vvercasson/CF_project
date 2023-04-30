@@ -152,7 +152,7 @@ int abs(int n)
     Quelle information manque-t’il pour assurer qu’il n’y aura pas d’erreur à l’exécution ?
 
     \begin{solutionorbox}
-        La valeur de la variable n doit aussi comprendre les condtion $n < INTMAX$ et $n>INTMIN$
+        La valeur de la variable n doit aussi comprendre les condtion $n < INT\_MAX$ et $n>INT\_MIN$
         pour garantir que la fonction ne provoquera pas d'erreur raison d'un dépassement de capacité.
     \end{solutionorbox}
 
@@ -196,9 +196,9 @@ int abs2(int n)
 
     \begin{solutionorbox}
         $
-        requires \quad n \geq INT\_MIN;\\
-        requires \quad n < INT\_MAX;
+        requires \quad INT\_MAX > n \geq INT\_MIN;\\
         $
+        Afin d'éviter un debordement de capacité, il faut que la valeur de n soit comprise entre INT\_MAX et INT\_MIN afin de s'assurer que n+1 ne deborde pas.
     \end{solutionorbox}
 
     \part Compléter le fichier \texttt{abs.h} de manière à ce que Frama-C puisse démontrer la post-condition fournie, en ajoutant les assertions RTE. Il est bien évidemment possible (et encouragé) de répondre aux questions précédentes grâce à celle-ci.
