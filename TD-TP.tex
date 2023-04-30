@@ -275,16 +275,16 @@ int abs2(int n)
         I4 :  $\exists k; 1 \leq k < n \Rightarrow min = tab[k]$\\
         I5 :  $\exists k; 1 \leq k < n \Rightarrow max= tab[k]$
         \\ \\
-        I = I1 ∧ I2 ∧ I3 ∧ I4 ∧ I5
+        I = I1 $\wedge$ I2 $\wedge$ I3 $\wedge$ I4 $\wedge$ I5
         \\ \\
-        On peut justifier $\neg(i < n) ∧ I \Rightarrow \WLP(18,\phi)$ car cela revient à dire que quand on termine la boucle $(i=n) \iff \neg(i < n)$, 
+        On peut justifier $\neg(i < n) \wedge I \Rightarrow \WLP(18,\phi)$ car cela revient à dire que quand on termine la boucle $(i=n) \iff \neg(i < n)$, 
         et que tous les invariants sont alors prouvés, alors on peut faire le return de max-min.
     \end{solutionorbox}
 
     \part Déduisez-en un triplet de \bsc{Hoare} valide pour votre fonction.
 
     \begin{solutionorbox}
-        Ainsi, on a bien $i<n ∧I1∧I2∧I3∧I4∧I5 \Rightarrow WLP(12-16,I1∧I2∧I3∧I4∧I5)$, et donc on a bien un invariant de boucle.
+        Ainsi, on a bien $i<n  \wedge I1 \wedge I2 \wedge I3 \wedge I4 \wedge I5 \Rightarrow WLP(12-16,I1\wedge I2\wedge I3\wedge I4\wedge I5)$, et donc on a bien un invariant de boucle.
         \\ \\
         On déduit de tout cela que $\WLP(max\_dist,\phi)$ est bien défini,\\ 
         et que $\{i<n\}max\_dist\{\phi\}$ est un triplet de Hoare valide.
