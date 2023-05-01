@@ -135,15 +135,15 @@ int abs(int n)
     \begin{solutionorbox}
         $
         \psi = \result == abs(n)\\
-        \WP(\code{abs},\psi) = \WP(5,\WP(6-7,\WP(8,\psi)))\\
-        \WP(\code{abs},\psi) = \WP(5,\WP(6-7,\psi[\result \leftarrow res]))\\
-        \WP(\code{abs},\psi) = n<0 \Rightarrow \psi[\result \leftarrow res][res \leftarrow -n]\\
+        \WP(\code{abs},\psi) \equiv \WP(5,\WP(6-7,\WP(8,\psi)))\\
+        \WP(\code{abs},\psi) \equiv \WP(5,\WP(6-7,\psi[\result \leftarrow res]))\\
+        \WP(\code{abs},\psi) \equiv n<0 \Rightarrow \psi[\result \leftarrow res][res \leftarrow -n]\\
         \land n \geq 0 \Rightarrow \psi[\result \leftarrow res][res \leftarrow n]\\
-        \WP(\code{abs},\psi) = n<0 \Rightarrow (res == abs(n))[res \leftarrow -n] \\
+        \WP(\code{abs},\psi) \equiv n<0 \Rightarrow (res == abs(n))[res \leftarrow -n] \\
         \land n \geq 0 \Rightarrow (res == abs(n))[res \leftarrow n]\\
-        \WP(\code{abs},\psi) = (n<0 \Rightarrow -n == abs(n)) \land (n \geq 0 \Rightarrow n == abs(n))\\
-        \WP(\code{abs},\psi) = n<0 \lor n \geq 0(trivial)\\
-        \WP(\code{abs},\psi) = \bot
+        \WP(\code{abs},\psi) \equiv (n<0 \Rightarrow -n == abs(n)) \land (n \geq 0 \Rightarrow n == abs(n))\\
+        \WP(\code{abs},\psi) \equiv n<0 \lor n \geq 0(trivial)\\
+        \WP(\code{abs},\psi) \equiv \bot
         $
         \\ \\
         $ \{\bot\}abs\{\psi\} $ est un triplet de \bsc{Hoare} valide.
@@ -176,11 +176,11 @@ int abs2(int n)
 
     \begin{solutionorbox}
         $
-        \WP(\code{abs2},\psi) = \WP(5,WP(6,\psi))\\
-        \WP(\code{abs2},\psi) = \WP(5,\psi[\result \leftarrow n*aux])\\
-        \WP(\code{abs2},\psi) = \WP(5,\psi[\result \leftarrow n*(n\%2 + (n+1)\%2)])\\
-        \WP(\code{abs2},\psi) = \WP(5,\psi[\result \leftarrow n*(n\%2) + n*((n+1)\%2)])\\
-        \WP(\code{abs2},\psi) = \psi[\result \leftarrow * (n\%2) + n * ((n + 1)\%2)]
+        \WP(\code{abs2},\psi) \equiv \WP(5,WP(6,\psi))\\
+        \WP(\code{abs2},\psi) \equiv \WP(5,\psi[\result \leftarrow n*aux])\\
+        \WP(\code{abs2},\psi) \equiv \WP(5,\psi[\result \leftarrow n*(n\%2 + (n+1)\%2)])\\
+        \WP(\code{abs2},\psi) \equiv \WP(5,\psi[\result \leftarrow n*(n\%2) + n*((n+1)\%2)])\\
+        \WP(\code{abs2},\psi) \equiv \psi[\result \leftarrow * (n\%2) + n * ((n + 1)\%2)]
         $ 
         \\ \\
         La formule est toujours vraie car on retourne -n si la valeur est négative et n si elle est positive ou nul, ce qu'on attend de \textbf{abs2}.
@@ -250,9 +250,9 @@ int abs2(int n)
 
     \begin{solutionorbox}
         $
-        \WLP(12-16,I) = WLP(12-15,I[i++])\\
-        \WLP(12-16,I) =  tab[i] < min \Rightarrow \WLP(13,I') \wedge tab[i] > max \Rightarrow WLP(15,I')\\
-        WLP(12-16,I) = tab[i] < min \Rightarrow I'[min \leftarrow tab[i]] \wedge tab[i] > max \Rightarrow I'[max \leftarrow tab[i]]
+        \WLP(12-16,I) \equiv WLP(12-15,I[i++])\\
+        \WLP(12-16,I) \equiv  tab[i] < min \Rightarrow \WLP(13,I') \wedge tab[i] > max \Rightarrow WLP(15,I')\\
+        WLP(12-16,I) \equiv tab[i] < min \Rightarrow I'[min \leftarrow tab[i]] \wedge tab[i] > max \Rightarrow I'[max \leftarrow tab[i]]
         \\ \\
         I' = I[i++]
         $
@@ -291,6 +291,23 @@ int abs2(int n)
         \\ \\
         On peut justifier $\neg(i < n) \wedge I \Rightarrow \WLP(18,\phi)$ car cela revient à dire que quand on termine la boucle $(i=n) \iff \neg(i < n)$, 
         et que tous les invariants sont alors prouvés, alors on peut faire le return de max-min.
+        \\ \\
+        WLP(12-16,I1) :
+        \\ \\
+        WLP(12-16,I2) : \\
+        $
+        \WLP(12-16,I2) \equiv (tab[i] < min) \Rightarrow \forall integer \ a, b; 1 \leq a < b < i \Rightarrow max - min \geq abs(tab[a] - tab[b]) \wedge\\
+         (tab[i] > max) \Rightarrow \forall integer \ a, b; 1 \leq a < b < i \Rightarrow max - tab[i] \geq abs(tab[a] - tab[b])$
+        \\ \\
+        Sur $(tab[i] > max)$ on fait $max - tab[i]$ car juste avant on verifie la condition $(tab[i] < min)$.
+        Mais on sait que $min < max$ donc on vérifie dans ce cas pour tab[i].
+        \\ \\
+        WLP(12-16,I3) :\\
+        $\WLP(12-16, I3) \equiv \forall integer \ j; 1 \leq j < i \wedge (tab[i] < min \Rightarrow min \leq tab[j] \leq max) \wedge (tab[i] > max \Rightarrow min \leq tab[j] \leq max)$
+        \\ \\
+        WLP(12-16,I4) :
+        \\ \\
+        WLP(12-16,I5) :
     \end{solutionorbox}
 
     \part Déduisez-en un triplet de \bsc{Hoare} valide pour votre fonction.
@@ -411,19 +428,29 @@ int min_dist(int *tab, unsigned int n)
     \part Quelle condition doit-être vraie à la sortie de la boucle extérieure (i.e, $\WLP(23,\psi))$, pour $\psi$ la post-condition ?
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        \forall \ integer \ i; 0 \leq i < n \Rightarrow \\
+        (\forall \ integer \ j; i < j < n \Rightarrow min \leq abs ( tab [ i ] - tab [ j ]));$
     \end{solutionorbox}
 
        \part Calculez $\WLP(14-17,J)$ pour un invariant J quelconque.
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        \WLP(14-17,J) \equiv \WLP(14,\WLP(15-16,J[j++]))
+        $
     \end{solutionorbox}
 
     \part Calculez $\WLP(19-21,I)$ pour un invariant I quelconque (pour déterminer ce qui doit être vrai à la sortie de la boucle interne, en fonction de I).
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        \WLP(19-21,I) \equiv \WLP(19-20,I[i++])\\
+        \WLP(19-21,I) \equiv (min_i < min) \Rightarrow \WLP(20,I')\\
+        \WLP(19-21,I) \equiv (min_i < min) \Rightarrow I'[min = min_i]
+        \\ \\
+        I' = I[i++]
+        $
     \end{solutionorbox}
 
     \part Calculez $\WLP(10-21,I)$ pour un invariant I quelconque, en admettant que l’invariant de la boucle interne (14-17) est J.
