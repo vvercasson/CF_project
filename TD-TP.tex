@@ -134,7 +134,7 @@ int abs(int n)
 
     \begin{solutionorbox}
         $
-        \psi = \result == abs(n)\\
+        \psi = \result == abs(n)\\ \\
         \WP(\code{abs},\psi) = \WP(5,\WP(6-7,\WP(8,\psi)))\\
         \WP(\code{abs},\psi) = \WP(5,\WP(6-7,\psi[\result \leftarrow res]))\\
         \WP(\code{abs},\psi) = n<0 \Rightarrow \psi[\result \leftarrow res][res \leftarrow -n]\\
@@ -176,6 +176,7 @@ int abs2(int n)
 
     \begin{solutionorbox}
         $
+        \psi = \result == abs(n)\\ \\
         \WP(\code{abs2},\psi) = \WP(5,WP(6,\psi))\\
         \WP(\code{abs2},\psi) = \WP(5,\psi[\result \leftarrow n*aux])\\
         \WP(\code{abs2},\psi) = \WP(5,\psi[\result \leftarrow n*(n\%2 + (n+1)\%2)])\\
