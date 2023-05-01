@@ -477,7 +477,7 @@ int min_dist(int *tab, unsigned int n)
 
     \begin{solutionorbox}
         Pour la boucle extérieur :\\
-        $assigns \ min, i, min\_i, j;$
+        $assigns \ min, i;$
         \\ \\
         Pour la boucle intérieur :\\
         $loop \ assigns \ min\_i, j;$
@@ -497,19 +497,30 @@ int min_dist(int *tab, unsigned int n)
     \end{itemize}
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        I1 : 0 <= i <= n-1;\\
+        I2 : 
+        J1 : i+1 ≤ j ≤ n\\
+        J2 : 
+        $
     \end{solutionorbox}
 
     \part Déterminez les pré-conditions qui permettent de démontrer ce contrat de fonction et que les gardes RTE sont satisfaites.
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        Il manque :\\
+        $
+        @requires \ n \geq 1 \ \&\& \ \textbackslash{valid}(tab+(0..n-1));
+        $
     \end{solutionorbox}
 
     \part Démontrez la terminaison de la fonction en donnant un variant de boucle pour chaque boucle et en démontrant qu’ils décroissent à chaque tour de boucle et qu’ils sont toujours positifs (vous pouvez utiliser les calculs des questions précédentes).
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        @ loop \ variant \ (n-1) - i;\\
+        @ loop \ variant \ n - j;
+        $
     \end{solutionorbox}
 
     \part Trouvez une fonction très simple (d’une instruction) qui satisfait le même contrat de fonction.
