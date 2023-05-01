@@ -247,7 +247,17 @@ int abs2(int n)
     Mettez-la en forme de manière à avoir la conjonction de 4 implications (en appliquant que $P \Rightarrow (Q\wedge R)$ est équivalent à $(P \Rightarrow Q) \wedge (P \Rightarrow R)$, et $P \Rightarrow Q \Rightarrow R$ est équivalent à $(P\wedge Q) \Rightarrow R$).
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        \WLP(12-16,I) = WLP(12-15,I[i++])\\
+        \WLP(12-16,I) =  tab[i] < min \Rightarrow \WLP(13,I') \wedge tab[i] > max \Rightarrow WLP(15,I')\\
+        WLP(12-16,I) = tab[i] < min \Rightarrow I'[min \leftarrow tab[i]] \wedge tab[i] > max \Rightarrow I'[max \leftarrow tab[i]]
+        \\ \\
+        I' = I[i++]
+        $
+        \\ \\
+        La notion de de la conjonction des 4 implications n'a pas été bien comprise pour 
+        notre groupe, nous avons donc calculé le $\WLP(12-16,I)$ de la même façon que se déroule
+        l'algorithme.
     \end{solutionorbox}
 
     \part Proposez des invariants de boucle pour votre boucle.
@@ -293,7 +303,23 @@ int abs2(int n)
     \part Démontrez la terminaison de la fonction en donnant un variant de boucle et en démontrant qu’il décroît à chaque tour de boucle et qu’il est toujours positif (vous pouvez utiliser le calcul de la question b).
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        Voici notre variant :\\
+        $@ loop \ variant \ n - i;$
+        \\ \\
+        On sait que la variable i est forcément inférieur à n d'après la condition.\\
+        On sait aussi que à chaque fin de tour on incrémente i de 1. Alors si on prend notre invariant,
+        sachant que n > i et i s'incrémente.\\
+        Alors n-i va décroitre. Exemple :\\
+        n = 5\\
+        i = 1\\
+
+        n-i = 4\\
+        i++\\
+        fin de boucle\\
+
+        n-i = 3\\
+        i++\\
+        fin de boucle\\
     \end{solutionorbox}
 
     \part Quelles sont les valeurs mémoires modifiées par cette fonction (et la boucle) ? Vous répondrez en donnant les clauses assigns et loop assigns correspondantes.
