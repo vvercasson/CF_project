@@ -134,6 +134,7 @@ int abs(int n)
 
     \begin{solutionorbox}
         $
+        \psi = \result == abs(n)\\
         \WP(\code{abs},\psi) = \WP(5,\WP(6-7,\WP(8,\psi)))\\
         \WP(\code{abs},\psi) = \WP(5,\WP(6-7,\psi[\result \leftarrow res]))\\
         \WP(\code{abs},\psi) = n<0 \Rightarrow \psi[\result \leftarrow res][res \leftarrow -n]\\
@@ -141,10 +142,11 @@ int abs(int n)
         \WP(\code{abs},\psi) = n<0 \Rightarrow (res == abs(n))[res \leftarrow -n] \\
         \land n \geq 0 \Rightarrow (res == abs(n))[res \leftarrow n]\\
         \WP(\code{abs},\psi) = (n<0 \Rightarrow -n == abs(n)) \land (n \geq 0 \Rightarrow n == abs(n))\\
-        \WP(\code{abs},\psi) = n<0 \lor n \geq 0
+        \WP(\code{abs},\psi) = n<0 \lor n \geq 0(trivial)\\
+        \WP(\code{abs},\psi) = \bot
         $
         \\ \\
-        $ \{n<0 \lor n \geq 0\}abs\{\result == abs(n)\} $ est un triplet de \bsc{Hoare} valide.
+        $ \{\bot\}abs\{\psi\} $ est un triplet de \bsc{Hoare} valide.
         
     \end{solutionorbox}
 
