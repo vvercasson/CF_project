@@ -1,11 +1,5 @@
 #include "max_dist.h"
 
-/*
-    Pour max_dist nous avons eu des difficultés à prouver les rte : max - min <= INT_MAX et max-min >= INT_MIN
-    En effet, je ne comprenais pas bien comment borner les résultats de ce calcul.
-*/
-
-
 int max_dist(int *tab, unsigned int n)
 {
     int min = tab[0];
