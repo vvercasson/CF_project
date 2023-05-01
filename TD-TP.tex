@@ -437,8 +437,14 @@ int min_dist(int *tab, unsigned int n)
 
     \begin{solutionorbox}
         $
-        \WLP(14-17,J) \equiv \WLP(14,\WLP(15-16,J[j++]))
-        \WLP(14-17,J)
+        \WLP(14-17,J) \equiv \WLP(14,\WLP(15-16,J[j++]))\\
+        \WLP(14-17,J) \equiv (d < min\_i) \Rightarrow \WLP(14,WLP(16,I'))\\
+        \WLP(14-17,J) \equiv (d < min\_i) \Rightarrow \WLP(14,J'[min\_i = d])\\
+        \WLP(14-17,J) \equiv (d < min\_i) \Rightarrow J''[d = abs(tab[i] - tab[j])]
+        \\ \\
+        J' = [j++]
+        \\
+        J'' = J'[min\_i = d]
         $
     \end{solutionorbox}
 
@@ -447,8 +453,8 @@ int min_dist(int *tab, unsigned int n)
     \begin{solutionorbox}
         $
         \WLP(19-21,I) \equiv \WLP(19-20,I[i++])\\
-        \WLP(19-21,I) \equiv (min_i < min) \Rightarrow \WLP(20,I')\\
-        \WLP(19-21,I) \equiv (min_i < min) \Rightarrow I'[min = min_i]
+        \WLP(19-21,I) \equiv (min\_i < min) \Rightarrow \WLP(20,I')\\
+        \WLP(19-21,I) \equiv (min\_i < min) \Rightarrow I'[min = min\_i]
         \\ \\
         I' = I[i++]
         $
@@ -457,13 +463,24 @@ int min_dist(int *tab, unsigned int n)
     \part Calculez $\WLP(10-21,I)$ pour un invariant I quelconque, en admettant que l’invariant de la boucle interne (14-17) est J.
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        $
+        \WLP(10-21,I) \equiv WLP(10,WLP(11,WLP(12-22)))\\
+        \WLP(10-21,I) \equiv WLP(10,WLP(11,(j<n) \Rightarrow J))\\
+        \WLP(10-21,I) \equiv WLP(10,I[J'][j=j+2])\\
+        \WLP(10-21,I) \equiv I[J'][j=j+2][min\_i = abs(tab[i] - tab[i+1])]
+        \\ \\
+        J' = (j<n) \Rightarrow J
+        $
     \end{solutionorbox}
 
     \part Donnez les clauses loop assigns et assigns pour cette fonction.
 
     \begin{solutionorbox}
-        METTEZ VOTRE RÉPONSE ICI.
+        Pour la boucle extérieur :\\
+        $assigns \ min, i, min\_i, j;$
+        \\ \\
+        Pour la boucle intérieur :\\
+        $loop \ assigns \ min\_i, j;$
     \end{solutionorbox}
 
     \part Proposez des invariants pour les deux boucles -- on ne vous demande pas de démontrer la correction sur papier, mais uniquement de vérifier avec frama-c que vos invariants en sont et sont suffisants.
