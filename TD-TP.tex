@@ -281,9 +281,9 @@ int abs2(int n)
     Pour chacun des invariants, comme elles sont similaires, vous pouvez n’expliquer qu’une seule des quatre implications
 
     \begin{solutionorbox}
-        I1 : $1 \leq i \leq n$;\\
+        I1 : $1 \leq i \leq n$\\
         I2 : $\forall a,b; 1 \leq a < b < i \Rightarrow max - min \geq abs(tab[a] - tab[b])$\\
-        I3 : $\forall integer\ k; 1 \leq k < i \Rightarrow min \leq tab[k] \leq max;$\\
+        I3 : $\forall integer\ k; 1 \leq k < i \Rightarrow min \leq tab[k] \leq max$\\
         I4 :  $\exists k; 1 \leq k < n \Rightarrow min = tab[k]$\\
         I5 :  $\exists k; 1 \leq k < n \Rightarrow max= tab[k]$
         \\ \\
@@ -292,7 +292,8 @@ int abs2(int n)
         On peut justifier $\neg(i < n) \wedge I \Rightarrow \WLP(18,\phi)$ car cela revient à dire que quand on termine la boucle $(i=n) \iff \neg(i < n)$, 
         et que tous les invariants sont alors prouvés, alors on peut faire le return de max-min.
         \\ \\
-        WLP(12-16,I1) :
+        WLP(12-16,I1) : \\
+        $ WLP(12-16, I1) ≡ 1 \leq i \leq n;$
         \\ \\
         WLP(12-16,I2) : \\
         $
@@ -305,9 +306,10 @@ int abs2(int n)
         WLP(12-16,I3) :\\
         $\WLP(12-16, I3) \equiv \forall integer \ j; 1 \leq j < i \wedge (tab[i] < min \Rightarrow min \leq tab[j] \leq max) \wedge (tab[i] > max \Rightarrow min \leq tab[j] \leq max)$
         \\ \\
-        WLP(12-16,I4) :
+        WLP(12-16,I4) :\\
+        $\WLP(12-16,I4) \equiv \exists k; 1 ≤ k < n \Rightarrow min = tab[k]$
         \\ \\
-        WLP(12-16,I5) :
+        $\WLP(12-16,I5) : \equiv \exists k; 1 ≤ k < n \Rightarrow max = tab[k]$
     \end{solutionorbox}
 
     \part Déduisez-en un triplet de \bsc{Hoare} valide pour votre fonction.
@@ -466,8 +468,8 @@ int min_dist(int *tab, unsigned int n)
         $
         \WLP(10-21,I) \equiv WLP(10,WLP(11,WLP(12-22)))\\
         \WLP(10-21,I) \equiv WLP(10,WLP(11,(j<n) \Rightarrow J))\\
-        \WLP(10-21,I) \equiv WLP(10,I[J'][j=j+2])\\
-        \WLP(10-21,I) \equiv I[J'][j=j+2][min\_i = abs(tab[i] - tab[i+1])]
+        \WLP(10-21,I) \equiv WLP(10,I[J'][j=i+2])\\
+        \WLP(10-21,I) \equiv I[J'][j=i+2][min\_i = abs(tab[i] - tab[i+1])]
         \\ \\
         J' = (j<n) \Rightarrow J
         $
@@ -498,9 +500,9 @@ int min_dist(int *tab, unsigned int n)
 
     \begin{solutionorbox}
         $
-        I1 : 0 <= i <= n-1;\\
+        I1 : 0 \leq i \leq n-1;\\
         I2 : \\
-        J1 : i+1 ≤ j ≤ n\\
+        J1 : i+2 \leq j \leq n\\
         J2 : 
         $
     \end{solutionorbox}
