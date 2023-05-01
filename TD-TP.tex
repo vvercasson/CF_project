@@ -143,10 +143,10 @@ int abs(int n)
         \land n \geq 0 \Rightarrow (res == abs(n))[res \leftarrow n]\\
         \WP(\code{abs},\psi) = (n<0 \Rightarrow -n == abs(n)) \land (n \geq 0 \Rightarrow n == abs(n))\\
         \WP(\code{abs},\psi) = n<0 \lor n \geq 0(trivial)\\
-        \WP(\code{abs},\psi) = \bot
+        \WP(\code{abs},\psi) = \top
         $
         \\ \\
-        $ \{\bot\}abs\{\psi\} $ est un triplet de \bsc{Hoare} valide.
+        $ \{\top\}abs\{\psi\} $ est un triplet de \bsc{Hoare} valide.
         
     \end{solutionorbox}
 
