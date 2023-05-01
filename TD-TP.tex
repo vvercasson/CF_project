@@ -293,7 +293,7 @@ int abs2(int n)
         et que tous les invariants sont alors prouvés, alors on peut faire le return de max-min.
         \\ \\
         WLP(12-16,I1) : \\
-        $ WLP(12-16, I1) ≡ 1 \leq i \leq n;$
+        $ WLP(12-16, I1) \equiv 1 \leq i \leq n$
         \\ \\
         WLP(12-16,I2) : \\
         $
@@ -307,9 +307,9 @@ int abs2(int n)
         $\WLP(12-16, I3) \equiv \forall integer \ j; 1 \leq j < i \wedge (tab[i] < min \Rightarrow min \leq tab[j] \leq max) \wedge (tab[i] > max \Rightarrow min \leq tab[j] \leq max)$
         \\ \\
         WLP(12-16,I4) :\\
-        $\WLP(12-16,I4) \equiv \exists k; 1 ≤ k < n \Rightarrow min = tab[k]$
+        $\WLP(12-16,I4) \equiv \exists k; 1 \leq k < n \Rightarrow min = tab[k]$
         \\ \\
-        $\WLP(12-16,I5) : \equiv \exists k; 1 ≤ k < n \Rightarrow max = tab[k]$
+        $\WLP(12-16,I5) : \equiv \exists k; 1 \leq k < n \Rightarrow max = tab[k]$
     \end{solutionorbox}
 
     \part Déduisez-en un triplet de \bsc{Hoare} valide pour votre fonction.
