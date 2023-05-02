@@ -479,10 +479,10 @@ int min_dist(int *tab, unsigned int n)
 
     \begin{solutionorbox}
         Pour la boucle extérieur :\\
-        $assigns \ min, i;$
+        $assigns \ min, i, j, min\_i;$
         \\ \\
         Pour la boucle intérieur :\\
-        $loop \ assigns \ min\_i, j;$
+        $loop \ assigns \ d, min\_i, j;$
     \end{solutionorbox}
 
     \part Proposez des invariants pour les deux boucles -- on ne vous demande pas de démontrer la correction sur papier, mais uniquement de vérifier avec frama-c que vos invariants en sont et sont suffisants.
@@ -512,7 +512,7 @@ int min_dist(int *tab, unsigned int n)
     \begin{solutionorbox}
         Il manque :\\
         $
-        @requires \ n \geq 1 \ \&\& \ \textbackslash{valid}(tab+(0..n-1));
+        @requires \ n \geq 0 \ \&\& \ \textbackslash{valid}(tab+(0..n-1));
         $
     \end{solutionorbox}
 

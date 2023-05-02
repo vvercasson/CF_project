@@ -4,7 +4,7 @@ int min_dist(int *tab, unsigned int n)
     int min = abs(tab[0] - tab[1]);
     unsigned int i = 0;
     /*@
-        @ loop assigns j, min_i;
+        @ loop assigns i, min, j, min_i;
         @ loop invariant 0 <= i <= n - 1;
         @ loop variant (n - 1)-i;
     */
